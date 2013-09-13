@@ -2,6 +2,7 @@ package com.global.dbtest.service.impl;
 
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Scanner;
 
@@ -11,6 +12,7 @@ import org.eclipse.osgi.framework.console.CommandProvider;
 import com.global.dbtest.load.XmlMovieLoader;
 import com.global.dbtest.model.Movie;
 import com.global.dbtest.model.Movie.Format;
+import com.global.dbtest.model.MovieStar;
 import com.global.dbtest.service.MovieStorageService;
 
 
@@ -69,10 +71,21 @@ public class MoviesCommandProvider implements CommandProvider {
 		movie.setTitle(scanner.nextLine());
 
 		ci.println("Enter release year");
-		movie.setReleaseYear(scanner.nextInt());
+		movie.setReleaseYear(Integer.parseInt(scanner.nextLine()));
 
 		ci.println("Enter format");
-		movie.setFormat(resolveFormat(scanner.next()));
+		movie.setFormat(resolveFormat(scanner.nextLine()));
+
+		ci.println("Enter stars number");
+		int number = Integer.parseInt(scanner.nextLine()) ;
+		List<MovieStar> stars = new LinkedList<MovieStar>();
+		while (number > 0) {
+			ci.println("Enter next star name");
+			MovieStar currentStar = new MovieStar();
+			currentStar.setName(scanner.nextLine());
+			number--;
+		}
+		movie.setStars(stars);
 
 		this.movieStorageService.saveMovie(movie);
 	}
@@ -101,8 +114,7 @@ public class MoviesCommandProvider implements CommandProvider {
 		String title = scanner.nextLine();
 		printMovies(ci, this.movieStorageService.findMoviesByTitle(title));
 	}
-	
-	
+
 	public void _findbystar(CommandInterpreter ci) {
 		ci.println("Enter star name");
 		Scanner scanner = new Scanner(System.in);
