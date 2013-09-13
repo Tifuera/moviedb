@@ -7,6 +7,7 @@
 		<provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
 
 		<class>com.global.dbtest.model.Movie</class>
+		<class>com.global.dbtest.model.MovieStar</class>
 		<exclude-unlisted-classes>true</exclude-unlisted-classes>
 
 		<properties>

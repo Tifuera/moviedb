@@ -22,7 +22,7 @@ public class MovieStorageServiceImpl implements MovieStorageService {
 		EntityTransaction transaction = this.em.getTransaction();
 
 		transaction.begin();
-		this.em.persist(movie);
+		this.em.merge(movie);
 		transaction.commit();
 	}
 
@@ -33,7 +33,7 @@ public class MovieStorageServiceImpl implements MovieStorageService {
 		transaction.begin();
 
 		for (Movie movie : movies) {
-			this.em.persist(movie);
+			this.em.merge(movie);
 		}
 
 		transaction.commit();

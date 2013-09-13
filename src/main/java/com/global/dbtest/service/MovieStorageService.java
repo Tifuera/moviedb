@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.global.dbtest.model.Movie;
 
+
 public interface MovieStorageService {
 
 	void saveMovie(Movie movie) ;

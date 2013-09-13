@@ -2,16 +2,19 @@ package com.global.dbtest.model;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
-import javax.persistence.Transient;
 
 import com.global.dbtest.Constants;
 
@@ -32,8 +35,11 @@ public class Movie {
 	private int releaseYear;
 	@Enumerated
 	private Format format;
-	@Transient
-	private List<String> stars;
+
+	@ManyToMany(cascade = CascadeType.ALL)
+	@JoinTable(name = "movie_star", joinColumns = { @JoinColumn(name = "movie_id", referencedColumnName = "id") }, 
+		inverseJoinColumns = { @JoinColumn(name = "star_name", referencedColumnName = "name") })
+	private List<MovieStar> stars;
 
 	public int getId() {
 		return this.id;
@@ -67,11 +73,11 @@ public class Movie {
 		this.format = format;
 	}
 
-	public List<String> getStars() {
+	public List<MovieStar> getStars() {
 		return this.stars;
 	}
 
-	public void setStars(List<String> stars) {
+	public void setStars(List<MovieStar> stars) {
 		this.stars = stars;
 	}
 

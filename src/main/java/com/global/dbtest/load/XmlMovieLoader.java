@@ -12,13 +12,15 @@ import org.xml.sax.helpers.DefaultHandler;
 
 import com.global.dbtest.model.Movie;
 import com.global.dbtest.model.Movie.Format;
+import com.global.dbtest.model.MovieStar;
+
 
 public class XmlMovieLoader extends DefaultHandler {
 
 	private String fileName;
 	private String tmpValue;
 	private Movie currentMovie;
-	private List<String> stars;
+	private List<MovieStar> stars;
 	private List<Movie> movies;
 
 	public XmlMovieLoader(String fileName) {
@@ -47,7 +49,7 @@ public class XmlMovieLoader extends DefaultHandler {
 		}
 
 		if ("stars".equalsIgnoreCase(qName)) {
-			this.stars = new LinkedList<String>();
+			this.stars = new LinkedList<MovieStar>();
 		}
 	}
 
@@ -70,7 +72,9 @@ public class XmlMovieLoader extends DefaultHandler {
 			}
 			break;
 		case "star":
-			this.stars.add(this.tmpValue);
+			MovieStar tmpStar = new MovieStar();
+			tmpStar.setName(this.tmpValue);
+			this.stars.add(tmpStar);
 			break;
 		case "stars":
 			this.currentMovie.setStars(this.stars);
