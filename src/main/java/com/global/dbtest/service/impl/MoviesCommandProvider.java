@@ -14,7 +14,6 @@ import com.global.dbtest.model.Movie.Format;
 import com.global.dbtest.service.MovieStorageService;
 
 
-
 public class MoviesCommandProvider implements CommandProvider {
 
 	private MovieStorageService movieStorageService;
@@ -38,10 +37,7 @@ public class MoviesCommandProvider implements CommandProvider {
 			}
 		});
 
-		for (Movie movie : allMovies) {
-			ci.println(String.format("Movie title [%s], identifier [%d]",
-					movie.getTitle(), movie.getId()));
-		}
+		printMovies(ci, allMovies);
 	}
 
 	public void _listbyyear(CommandInterpreter ci) {
@@ -54,10 +50,7 @@ public class MoviesCommandProvider implements CommandProvider {
 			}
 		});
 
-		for (Movie movie : allMovies) {
-			ci.println(String.format("Movie title [%s], identifier [%d]",
-					movie.getTitle(), movie.getId()));
-		}
+		printMovies(ci, allMovies);
 	}
 
 	public void _deletemovie(CommandInterpreter ci) {
@@ -99,6 +92,22 @@ public class MoviesCommandProvider implements CommandProvider {
 
 		XmlMovieLoader loader = new XmlMovieLoader(filePath);
 		this.movieStorageService.saveMovies(loader.parseDocument());
+	}
+
+	public void _findbytitle(CommandInterpreter ci) {
+		ci.println("Enter title");
+		Scanner scanner = new Scanner(System.in);
+
+		String title = scanner.nextLine();
+		printMovies(ci, this.movieStorageService.findMoviesByTitle(title));
+	}
+	
+
+	private void printMovies(CommandInterpreter ci, List<Movie> allMovies) {
+		for (Movie movie : allMovies) {
+			ci.println(String.format("Movie title [%s], identifier [%d]",
+					movie.getTitle(), movie.getId()));
+		}
 	}
 
 	private Movie.Format resolveFormat(String name) {
