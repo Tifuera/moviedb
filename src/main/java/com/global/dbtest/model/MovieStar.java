@@ -28,5 +28,13 @@ public class MovieStar {
 		this.name = name;
 	}
 
+	public List<Movie> getMovies() {
+		return this.movies;
+	}
+
+	public void setMovies(List<Movie> movies) {
+		this.movies = movies;
+	}
+
 
 }

@@ -102,6 +102,14 @@ public class MoviesCommandProvider implements CommandProvider {
 		printMovies(ci, this.movieStorageService.findMoviesByTitle(title));
 	}
 	
+	
+	public void _findbystar(CommandInterpreter ci) {
+		ci.println("Enter star name");
+		Scanner scanner = new Scanner(System.in);
+
+		String name = scanner.nextLine();
+		printMovies(ci, this.movieStorageService.findMoviesByStar(name));
+	}
 
 	private void printMovies(CommandInterpreter ci, List<Movie> allMovies) {
 		for (Movie movie : allMovies) {

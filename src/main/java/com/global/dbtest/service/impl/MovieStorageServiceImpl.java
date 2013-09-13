@@ -7,7 +7,9 @@ import javax.persistence.EntityTransaction;
 
 import com.global.dbtest.Constants;
 import com.global.dbtest.model.Movie;
+import com.global.dbtest.model.MovieStar;
 import com.global.dbtest.service.MovieStorageService;
+
 
 public class MovieStorageServiceImpl implements MovieStorageService {
 
@@ -71,8 +73,12 @@ public class MovieStorageServiceImpl implements MovieStorageService {
 
 	@Override
 	public List<Movie> findMoviesByStar(String name) {
-		// TODO Auto-generated method stub
-		return null;
+		MovieStar star = this.em.find(MovieStar.class, name);
+
+		if (star == null) {
+			return null;
+		}
+		return star.getMovies();
 	}
 
 }
