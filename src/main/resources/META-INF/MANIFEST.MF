@@ -1,0 +1,14 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Test
+Bundle-SymbolicName: com.tifuera.test
+Bundle-Version: 1.0.0.qualifier
+Bundle-Activator: com.tifuera.test.Activator
+Bundle-Vendor: TIFUERA
+Require-Bundle: org.eclipse.core.runtime,
+ javax.persistence;bundle-version="2.1.0",
+ org.eclipse.gemini.jpa;bundle-version="1.2.0"
+Bundle-RequiredExecutionEnvironment: JavaSE-1.7
+Bundle-ActivationPolicy: lazy
+Meta-Persistence: META-INF/persistence.xml 
+Import-Package: javax.persistence;version="2.1.0"
